@@ -2,10 +2,9 @@
 
 // initial variables
 const selections = ["rock", "paper", "scissors"];
+let playerSelection, computerSelection, result, score, drawCount;
 // from player perspective the game can result in one of the following:
 const outcome = ["win", "lose", "draw"];
-let playerSelection = prompt("Please choose one: rock, paper, or scissors");
-const computerSelection = computerPlay();
 
 // randomly choose between rock, paper, and scissors for computer
 function computerPlay() {
@@ -30,11 +29,44 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-const result = playRound(playerSelection, computerSelection);
-if (result === "win") {
-  console.log(`You ${result}! ${playerSelection} beats ${computerSelection}`);
-} else if (result === "lose") {
-  console.log(`You ${result}! ${computerSelection} beats ${playerSelection}`);
-} else {
-  console.log(`It's a ${result}! You both chose ${playerSelection}`);
+function game() {
+  // initialize game variables
+  playerSelection = "";
+  computerSelection = "";
+  result = "";
+  score = 0;
+  drawCount = 0;
+
+  // series of 5 games
+  for (let i = 0; i < 5; i++) {
+    playerSelection = prompt("Please choose one: rock, paper, or scissors");
+    computerSelection = computerPlay();
+    playRound(playerSelection, computerSelection);
+    result = playRound(playerSelection, computerSelection);
+
+    if (result === "win") {
+      console.log(
+        `You ${result}! ${playerSelection} beats ${computerSelection}`
+      );
+      score++;
+    } else if (result === "lose") {
+      console.log(
+        `You ${result}! ${computerSelection} beats ${playerSelection}`
+      );
+    } else {
+      console.log(`It's a ${result}! You both chose ${playerSelection}`);
+      drawCount++;
+    }
+  }
+  if (score < 3) {
+    console.log(
+      `You lost the best of 5 series ${score} to ${5 - (score + drawCount)}`
+    );
+  } else {
+    console.log(
+      `You won the best of 5 series ${score} to ${5 - (score + drawCount)}`
+    );
+  }
 }
+
+game();
