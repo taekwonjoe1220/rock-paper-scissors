@@ -4,7 +4,13 @@
   box-sizing: border-box;
 }
 
-.container {
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container,
+.score-container,
+#reset {
   max-width: 760px;
   margin: 25px auto;
   display: flex;
